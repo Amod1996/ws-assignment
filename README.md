@@ -13,3 +13,4 @@ express --view=pug src
 
 2. Update `package.json`.
 3. Customize main app page (`index.pug`), add button and text.
+4. Integrate app with `socket.io` to recieve and emit events and show text on screen.

@@ -4,11 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var io = require('socket.io')();
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+app.io = io;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +43,18 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+/* socket.io server side script */
+io.on('connection', function(socket){
+
+  /* Event when the button is clicked on the web page */
+  socket.on('send message', function() {
+    var message = "This is the message from the server in app.js";
+    
+    /* sending the message to the client */
+    io.emit('receive message', message);
+  }) 
 });
 
 module.exports = app;
