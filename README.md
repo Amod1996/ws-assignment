@@ -12,3 +12,4 @@ express --view=pug src
 ```
 
 2. Update `package.json`.
+3. Customize main app page (`index.pug`), add button and text.
